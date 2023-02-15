@@ -1,0 +1,23 @@
+{
+  "name": "typescript-wishlist-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heinanX/Typescript-wishlist-backend.git"
+  },
+  "author": "Linda Eskilsson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/heinanX/Typescript-wishlist-backend/issues"
+  },
+  "homepage": "https://github.com/heinanX/Typescript-wishlist-backend#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^6.9.1"
+  }
+}
