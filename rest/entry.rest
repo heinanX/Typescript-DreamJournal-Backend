@@ -1,0 +1,15 @@
+GET http://localhost:3000/api/journal
+
+###
+
+POST http://localhost:3000/api/journal/entry
+Content-Type: application/json
+
+{
+    "title": "The hearty party",
+    "entry": "A group of friends"
+}
+
+###
+
+DELETE http://localhost:3000/api/journal/63ee7473c4d96ccae2d5d1c3 
