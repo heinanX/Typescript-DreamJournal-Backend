@@ -2,6 +2,9 @@ import express from 'express'
 import cors from 'cors'
 import { userRouter } from './user/user.router'
 import { entriesRouter } from './entries/entries.router'
+import { categoryRouter } from './category/cat.route'
+import { languageRouter } from './language/language.route'
+
 
 export const app = express();
 
@@ -15,3 +18,5 @@ app.use(express.json())
 
 app.use('/api/users', userRouter)
 app.use('/api/journal', entriesRouter)
+app.use('/api/category', categoryRouter)
+app.use('/api/language', languageRouter)
