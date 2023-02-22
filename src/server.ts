@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
-const { app } = require('./app');
+import mongoose from 'mongoose'
+import { app } from './app'
 
 async function connect() {
     mongoose.set('strictQuery', true)
-    await mongoose.connect('mongodb://127.0.0.1:27017/BobbysWish', { useNewUrlParser: true })
+    await mongoose.connect('mongodb://127.0.0.1:27017/BobbysWish')
     mongoose.connection.on('error', () => { console.log('error') })
     mongoose.connection.once('error', () => { console.log('server connected') })
 }

@@ -1,6 +1,7 @@
-const { EntryModel } =  require('./catalogue.model')
+import { EntryModel } from './entries.model'
+import { NextFunction, Request, Response} from 'express'
 
-async function getEntry(req, res) {
+export async function getEntry(req: Request, res: Response, next: NextFunction) {
     try {
         const entries = await EntryModel.find()
         res.status(200).json(entries)
@@ -9,7 +10,7 @@ async function getEntry(req, res) {
     }
 }
 
-async function createEntry(req, res, next) {
+export async function createEntry(req: Request, res: Response, next: NextFunction) {
 try {
     const entry = await EntryModel.create(req.body)
     res.status(201).json(entry)
@@ -18,9 +19,7 @@ try {
     }
 }
 
-async function deleteEntry(req, res, next) {
+export async function deleteEntry(req: Request, res: Response, next: NextFunction) {
     const deleted = await EntryModel.findOneAndRemove({ _id: req.params.id })
     res.status(200).json(deleted)
 }
-
-module.exports = { createEntry, getEntry, deleteEntry }

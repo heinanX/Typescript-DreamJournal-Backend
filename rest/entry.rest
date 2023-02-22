@@ -6,8 +6,8 @@ POST http://localhost:3000/api/journal/entry
 Content-Type: application/json
 
 {
-    "title": "The hearty party",
-    "entry": "A group of friends"
+    "title": "Thist was the new party princess",
+    "entry": "And she was going on and on about her drunken charades"
 }
 
 ###

@@ -1,4 +1,4 @@
-const { Schema, model, models } = require('mongoose')
+import { Schema, model, models } from 'mongoose'
 
 const userSchema = new Schema({
     username: { type: String},
@@ -6,6 +6,4 @@ const userSchema = new Schema({
     isAdmin: { type: Boolean, default: false}
 }, { versionKey: false })
 
-const UserModel = models.userSchema || model('users', userSchema)
-
-module.exports = { UserModel }
+export const UserModel = models.userSchema || model('users', userSchema)
