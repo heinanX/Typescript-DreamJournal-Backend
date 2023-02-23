@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.app = void 0;
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
+const cookie_session_1 = __importDefault(require("cookie-session"));
 const user_router_1 = require("./user/user.router");
 const entries_router_1 = require("./entries/entries.router");
 const cat_route_1 = require("./category/cat.route");
@@ -17,6 +18,11 @@ exports.app = (0, express_1.default)();
 // }
 exports.app.use((0, cors_1.default)());
 exports.app.use(express_1.default.json());
+exports.app.use((0, cookie_session_1.default)({
+    name: 'session',
+    secret: '$3cr3t',
+    maxAge: 24
+}));
 exports.app.use('/api/users', user_router_1.userRouter);
 exports.app.use('/api/journal', entries_router_1.entriesRouter);
 exports.app.use('/api/category', cat_route_1.categoryRouter);

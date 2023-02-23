@@ -1,9 +1,14 @@
 import { Schema, model, models } from 'mongoose'
 
 const userSchema = new Schema({
-    username: { type: String},
-    password:{ type: String},
-    isAdmin: { type: Boolean, default: false}
+    username: { type: String, require: true },
+    password: { type: String, require: true },
+    mail: { type: String, require: true },
+    isAdmin: { type: Boolean, default: false},
+    entry: { type: String, default: 'entries' },
+    likes: { type: String, default: 'likes' },
+    comments: { type: String, default: 'hello' },
+    joinDate: { type: Date, default: Date.now}
 }, { versionKey: false })
 
 export const UserModel = models.userSchema || model('users', userSchema)

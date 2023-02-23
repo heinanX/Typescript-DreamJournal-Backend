@@ -8,3 +8,5 @@ const express_1 = __importDefault(require("express"));
 const user_controller_1 = require("./user.controller");
 exports.userRouter = express_1.default.Router();
 exports.userRouter.post('/', user_controller_1.createUser);
+exports.userRouter.post('/login', user_controller_1.loginUser);
+exports.userRouter.post('/logout', user_controller_1.logoutUser);

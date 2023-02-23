@@ -8,16 +8,56 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createUser = void 0;
+exports.logoutUser = exports.loginUser = exports.createUser = void 0;
 const user_model_1 = require("./user.model");
-const saltRounds = 10;
-const myPlainTextPassword = 'p4$$w0rD';
-function createUser(req, res, next) {
-    return __awaiter(this, void 0, void 0, function* () {
-        // const isUser = UserModel.find(username: req.body.username)
-        const user = yield user_model_1.UserModel.create(req.body);
-        res.status(200).json(user);
-    });
-}
+const bcrypt_1 = __importDefault(require("bcrypt"));
+const createUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { username, password, mail } = req.body;
+        const checkUser = yield user_model_1.UserModel.findOne({ username: username });
+        if (!checkUser) {
+            const hashedPassword = yield bcrypt_1.default.hash(password, 12);
+            const newUser = {
+                username: username,
+                password: hashedPassword,
+                mail: mail
+            };
+            const user = yield user_model_1.UserModel.create(newUser);
+            res.status(200).json(user);
+        }
+        else {
+            return res.status(404).json('Username already taken');
+        }
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
 exports.createUser = createUser;
+const loginUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { username, password } = req.body;
+    const getUser = yield user_model_1.UserModel.findOne({ username: username });
+    if (!getUser) {
+        return res.status(404).json('Not a registered User.');
+    }
+    const match = yield bcrypt_1.default.compare(password, getUser.password);
+    if (match) {
+        req.session = getUser;
+        return res.status(200).json('Successful Login');
+    }
+    else {
+        res.status(404).json('incorrect password');
+    }
+});
+exports.loginUser = loginUser;
+const logoutUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { username } = req.body;
+    const getUser = yield user_model_1.UserModel.findOne({ username: username });
+    req.session = null;
+    res.status(200).json(`${username} have been logged out`);
+});
+exports.logoutUser = logoutUser;
